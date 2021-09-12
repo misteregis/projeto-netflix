@@ -26,10 +26,12 @@ $('.handle').on('click', function(){
         $(this).next().trigger('prev.owl.carousel')
 })
 
-$('.profile_list a').on('click', ()=>{
+$('.profile_list a').on('click', () => {
     $('body').css('overflow', 'auto')
-    $('.profile').fadeOut(()=>{
-        localStorage.setItem('logged', 'true');
-        $('.profile').remove()
+    $('.profile').fadeOut('fast', () => {
+        var t = new Date();
+        t.setSeconds(t.getSeconds() + logout)
+        $('header, main, .carrosel-filmes').fadeIn(750)
+        localStorage.setItem('timestamp', Math.round(t.getTime()/1000));
     })
 })

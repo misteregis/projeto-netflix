@@ -134,14 +134,27 @@
     </div>
 
     <script>
-        if (localStorage.getItem('logged') !== 'true')
-            document.querySelector('.profile').style.display = 'block'
+        let logout = 30; //Logout depois de X segundos
     </script>
-
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js"></script>
     <script src="js/owl/jquery.min.js"></script>
     <script src="js/owl/owl.carousel.min.js"></script>
     <script src="js/owl/setup.js"></script>
+
+    <script>
+        if (localStorage.getItem('logged') !== 'true') {
+            $('.profile').fadeIn()
+        } else {
+            $('body').css('overflow', 'auto')
+            $('header, main, .carrosel-filmes').fadeIn()
+        }
+        setInterval(() => {
+            if (parseInt(localStorage.getItem('timestamp')) === Math.round(Date.now()/1000))
+                $('header, main, .carrosel-filmes').fadeOut('fast', () => {
+                    $('.profile').fadeIn(750)
+                })
+        }, 850)
+    </script>
 
 </body>
 </html>
